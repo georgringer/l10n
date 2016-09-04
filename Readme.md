@@ -2,7 +2,7 @@
  
 This extensions tries to improve the language handling of the core after discussing at T3DD16.
 
-**Important**: This 
+**Important**: This is just for demo, don't use in production !!!
 
 ## Changes
 
