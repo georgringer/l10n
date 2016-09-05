@@ -29,9 +29,15 @@ class DataHandlerHook
             return;
         }
 
-        $where = $GLOBALS['TCA'][$table]['ctrl']['transOrigPointerField'] . '=' . ($id)
-            . ' AND ' . $GLOBALS['TCA'][$table]['ctrl']['languageField'] . '>0';
-        $this->getDatabaseConnection()->exec_UPDATEquery($table, $where, $fieldsToCare);
+        if (isset($GLOBALS['TCA'][$table]['ctrl']['transForeignTable'])) {
+            $where = 'pid=' . ($id);
+            $this->getDatabaseConnection()->exec_UPDATEquery($GLOBALS['TCA'][$table]['ctrl']['transForeignTable'], $where, $fieldsToCare);
+        } else {
+            $where = $GLOBALS['TCA'][$table]['ctrl']['transOrigPointerField'] . '=' . ($id)
+                . ' AND ' . $GLOBALS['TCA'][$table]['ctrl']['languageField'] . '>0';
+            $this->getDatabaseConnection()->exec_UPDATEquery($table, $where, $fieldsToCare);
+        }
+
     }
 
     /**
